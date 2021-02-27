@@ -32,7 +32,7 @@ def readinput(inputPath, input_file):
         elif (1 <= i <= input_file[S]):
             street_info = list(line.split(' '))
             input_file['Streets'][street_info[2]] = {
-                B: street_info[0], E: street_info[1] , L: street_info[3]}
+                B: street_info[0], E: street_info[1], L: int(street_info[3])}
             street_count += 1
 
         elif (i > input_file[S]):
@@ -66,8 +66,6 @@ def streetsAtIntersection(input_file):
 def outPutFile(routesPerIntersection, outPutFile):
     # Create direcotry
     Path(outPutFile).parent.mkdir(parents=True, exist_ok=True)
-    # print the number of intersections
-
     with open(outPutFile, 'w') as file:
         file.write(str(len(routesPerIntersection))+'\n')
         for s in routesPerIntersection:
@@ -79,12 +77,16 @@ def outPutFile(routesPerIntersection, outPutFile):
                 # Will find a way to addd weights to the dictionary
                 file.write(street + " " + str(1)+'\n')
 
-def getRoadUsage(input_parameters):
-    road_statistics={}
-    for s in input_parameters['Cars']:
-        print(s)
-        
-    return road_statistics
+
+def getTimeToComplete(input_parameters):
+    for key, car in input_parameters['Cars'].items():
+        car_path = car['Streets Needed']
+        sum=0
+        for path in car_path:
+            sum=sum +input_parameters['Streets'][path][L]
+        print(sum)
+        input_parameters['Cars'][key]['Time Needed']= sum
+    return input_parameters
 
 # TODO: add wieghts and remove unenccessary intersectrions to print
 
@@ -92,7 +94,7 @@ def getRoadUsage(input_parameters):
 if __name__ == '__main__':
     input_files = glob.glob("Inputs/*.txt")
     # for file in input_files:
-    file=input_files[0]
+    file = input_files[0]
     input_parameters = {D: 0, I: 0, S: 0,
                         V: 0, F: 0, 'Streets': {}, 'Cars': {}}
     input_parameters = readinput(file, input_parameters)

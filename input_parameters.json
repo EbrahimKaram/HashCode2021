@@ -1,0 +1,41 @@
+// From the Improved Implmentation
+{'Duration of the simulation': 6,
+ 'number of intersections': 4,
+ 'number of Streets': 5,
+ 'number of Cars': 2,
+ 'the bonus points for each car': 1000,
+ 'Streets': {'rue-de-londres': {'Intersection at start': '2',
+   'Intersection at end': '0',
+   'Time to Travel Street': '1'
+        },
+  'rue-d-amsterdam': {'Intersection at start': '0',
+   'Intersection at end': '1',
+   'Time to Travel Street': '1'
+        },
+  'rue-d-athenes': {'Intersection at start': '3',
+   'Intersection at end': '1',
+   'Time to Travel Street': '1'
+        },
+  'rue-de-rome': {'Intersection at start': '2',
+   'Intersection at end': '3',
+   'Time to Travel Street': '2'
+        },
+  'rue-de-moscou': {'Intersection at start': '1',
+   'Intersection at end': '2',
+   'Time to Travel Street': '3'
+        }
+    },
+ 'Cars': {
+        0: {'the number of streets': 4,
+   'Streets Needed': ['rue-de-londres',
+    'rue-d-amsterdam',
+    'rue-de-moscou',
+    'rue-de-rome'
+            ]
+        },
+        1: {'the number of streets': 3,
+   'Streets Needed': ['rue-d-athenes', 'rue-de-moscou', 'rue-de-londres'
+            ]
+        }
+    }
+}
