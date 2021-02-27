@@ -27,7 +27,7 @@ parising the information takes a while as well as figuring out how to parse the 
 ## The naive Algorithm
 Well currently streets lamps just cycle through on the intersections. We just turn on for second for each of the intersections. The tricky part is getting the intersections connected to each street. We just make it it turn on for 1 second each.
 
-Now I rewrote the naive implementation and we got the follwoiung score. 7,885,740 points. This is a bit upsetting since we would have gotten a higher score with File D which gave a score of zero.
+Now I rewrote the naive implementation and we got the follwoiung score. 7,885,740 points. This is a bit upsetting since we would have gotten a higher score with File D which gave a score of zero during the implementation.
 
 Now, here we considered the intersections to be considered at the end of the road. When we turn a green light, we turn the green light for the road that the car is already on. We aren't turning on for the road it will got to. (A key point to understand.)
 
@@ -37,7 +37,7 @@ You can check the implementaion by checking `Naive_implemtation.py`
 
 
 
-## Removing Unessarary roads and turning on more frequnt roads longer
+## Removing Unessarary roads and turning on more frequent roads longer
 The cars aren't passing on each road so if we removed the roads that aren't being used we can drastically improve the code. 
 
 We understand that cars start at the end of the road mentioned. 
@@ -51,7 +51,10 @@ This actaully improves our ranking to the following in the extended round
 * 6 in Lebanon
 * 36 in the US
 
+You can check the implementation by checking the code labeled `RemoveRoads_implemtation.py`
 
+### Stay on for longer where more used
+If cars are going to be using a road more often they need to be on more often then those that aren't used more often.
 
 
 ## Extra notes
