@@ -25,7 +25,7 @@ It is divided in the fowllign manner
 parising the information takes a while as well as figuring out how to parse the outputs
 
 ## The naive Algorithm
-Well currently streets lamps just cycle through on the intersections. We just turn on for second for each of the intersections. The tricky part is getting the intersections connected to each street. We just make it it turn for every second.
+Well currently streets lamps just cycle through on the intersections. We just turn on for second for each of the intersections. The tricky part is getting the intersections connected to each street. We just make it it turn on for 1 second each.
 
 Now I rewrote the naive implementation and we got the follwoiung score. 7,885,740 points. This is a bit upsetting since we would have gotten a higher score with File D which gave a score of zero.
 
