@@ -37,12 +37,11 @@ You can check the implementaion by checking `Naive_implemtation.py`
 
 
 
-## Removing Unessarary roads
+## Removing Unessarary roads and turning on more frequnt roads longer
 The cars aren't passing on each road so if we removed the roads that aren't being used we can drastically improve the code. 
 
-We understand that cars start at the end of the road mentioned. In a way, we don't care if the car starts in a certain place and nno other car enters that road. So we should actually ignore the first path in the cars planned trajecotry.
-
-If a road is in the path for multiple cars, we prefer to keep it on longer than other routes since it's more used and we don't want it to get jammed
+We understand that cars start at the end of the road mentioned. 
+If a road is in the path for multiple cars, we prefer to keep it on longer than other routes since it's more used and we don't want it to get jammed. 
 
 
 
