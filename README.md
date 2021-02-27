@@ -44,7 +44,14 @@ We understand that cars start at the end of the road mentioned.
 If a road is in the path for multiple cars, we prefer to keep it on longer than other routes since it's more used and we don't want it to get jammed. 
 
 ### Removing unecessary Roads
-If we just remove the intersections that no car passes by or uses. We get the following score. 
+If we just remove the intersections that no car passes by or uses. We get the following score. 8,629,998 points
+![removeUneccessaryRoads](https://user-images.githubusercontent.com/10140799/109398558-9ff27400-790b-11eb-8c64-abf0b38606d1.png)
+This actaully improves our ranking to the following in the extended round
+* 874 worldwide
+* 6 in Lebanon
+* 36 in the US
+
+
 
 
 ## Extra notes
