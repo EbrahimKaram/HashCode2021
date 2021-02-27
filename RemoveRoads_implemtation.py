@@ -46,7 +46,7 @@ def readinput(inputPath, input_file):
 def streetsAtIntersection(input_file):
     routesPerIntersection = {}
     for s in input_file["Streets"]:
-        intersection_ID = input_parameters['Streets'][s][B]
+        intersection_ID = input_parameters['Streets'][s][E]
         street_name = s
         if intersection_ID in routesPerIntersection:
             routesPerIntersection[intersection_ID]['name'].append(street_name)
@@ -81,23 +81,55 @@ def outPutFile(routesPerIntersection, outPutFile):
 def getTimeToComplete(input_parameters):
     for key, car in input_parameters['Cars'].items():
         car_path = car['Streets Needed']
-        sum=0
+        sum = 0
         for path in car_path:
-            sum=sum +input_parameters['Streets'][path][L]
+            sum = sum + input_parameters['Streets'][path][L]
         print(sum)
-        input_parameters['Cars'][key]['Time Needed']= sum
+        input_parameters['Cars'][key]['Time Needed'] = sum
     return input_parameters
 
-# TODO: add wieghts and remove unenccessary intersectrions to print
+# TODO: We should ignore the cars that won't complete in time
+
+
+def getRoadStatistics(input_parameters):
+    road_statistics = {}
+    for key, car in input_parameters['Cars'].items():
+        car_path = car['Streets Needed']
+        for path in car_path:
+            input_parameters['Streets'][path][L]
+            if path in road_statistics:
+                road_statistics[path] += 1
+            else:
+                road_statistics[path] = 1
+    return road_statistics
+
+# TODO: add wieghts
+# TODO: remove unenccessary intersectrions and roads to print to print
+
+
+def removeUnusedRoads(road_statistics, routesAtIntersection):
+    for intersection in list(routesAtIntersection):
+        roads = routesAtIntersection[intersection]['name']
+        for road in roads:
+            # if the road is not used we need to remove it from list
+            if road not in road_statistics.keys():
+                routesAtIntersection[intersection]['name'].remove(road)
+        # If no roads are used and all removed.
+        if not routesAtIntersection[intersection]['name']:
+            print("empty List")
+            del routesAtIntersection[intersection]
+    return routesAtIntersection
 
 
 if __name__ == '__main__':
     input_files = glob.glob("Inputs/*.txt")
-    # for file in input_files:
-    file = input_files[0]
-    input_parameters = {D: 0, I: 0, S: 0,
-                        V: 0, F: 0, 'Streets': {}, 'Cars': {}}
-    input_parameters = readinput(file, input_parameters)
-    routesAtIntersection = streetsAtIntersection(input_parameters)
-    # file_name = Path(file).name
-    # outPutFile(routesAtIntersection, 'Outputs/output_'+file_name)
+    for file in input_files:
+    # file = input_files[0]
+        input_parameters = {D: 0, I: 0, S: 0,
+                            V: 0, F: 0, 'Streets': {}, 'Cars': {}}
+        input_parameters = readinput(file, input_parameters)
+        routesAtIntersection = streetsAtIntersection(input_parameters)
+        road_statistics = getRoadStatistics(input_parameters)
+        routesAtIntersection = removeUnusedRoads(road_statistics, routesAtIntersection)
+        file_name = Path(file).name
+        outPutFile(routesAtIntersection, 'Outputs/output_'+file_name)

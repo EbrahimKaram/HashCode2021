@@ -43,6 +43,8 @@ The cars aren't passing on each road so if we removed the roads that aren't bein
 We understand that cars start at the end of the road mentioned. 
 If a road is in the path for multiple cars, we prefer to keep it on longer than other routes since it's more used and we don't want it to get jammed. 
 
+### Removing unecessary Roads
+If we just remove the intersections that no car passes by or uses. We get the following score. 
 
 
 ## Extra notes
