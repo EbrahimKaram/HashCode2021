@@ -31,6 +31,8 @@ Now I rewrote the naive implementation and we got the follwoiung score. 7,885,74
 
 ![naiveImplementation](https://user-images.githubusercontent.com/10140799/109394042-ec7d8580-78f2-11eb-9092-d8dc5b7254e6.png)
 
+You can check teh implementaion by checking `Naive_implemtation.py`
+
 ## Removing Unessarary roads
 The cars aren't passing on each road so if we removed the roads that aren't being used we can drastically improve the code. 
 
