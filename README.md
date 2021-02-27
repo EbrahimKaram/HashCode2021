@@ -18,7 +18,7 @@ During the competition, we were able to get
 7,399,566 points
 We were ranked 5112 in the world, ranked 23 in Lebanon, and 207 in the US.
 
-It is divided in the fowllign manner
+It is divided in the following manner
 ![ScoreDuringCompetition](https://user-images.githubusercontent.com/10140799/109393997-aa544400-78f2-11eb-807e-50cb962b8cc3.png)
 
 **PLEASE NOTE**
@@ -33,7 +33,7 @@ Now, here we considered the intersections to be considered at the end of the roa
 
 ![naiveImplementation](https://user-images.githubusercontent.com/10140799/109394042-ec7d8580-78f2-11eb-9092-d8dc5b7254e6.png)
 
-You can check teh implementaion by checking `Naive_implemtation.py`
+You can check the implementaion by checking `Naive_implemtation.py`
 
 
 
