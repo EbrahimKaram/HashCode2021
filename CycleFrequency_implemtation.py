@@ -63,6 +63,8 @@ def streetsAtIntersection(input_file):
 #  '2': {'name': ['rue-de-moscou']}}
 
 # Changes: added a weight print
+
+
 def outPutFile(routesPerIntersection, outPutFile):
     # Create direcotry
     Path(outPutFile).parent.mkdir(parents=True, exist_ok=True)
@@ -73,9 +75,15 @@ def outPutFile(routesPerIntersection, outPutFile):
             numberOfStreets = len(streets)
             file.write(str(s)+'\n')
             file.write(str(numberOfStreets)+'\n')
+            count = 0
             for street in streets:
                 # Will find a way to addd weights to the dictionary
-                file.write(street + " " + str(1)+'\n')
+                if 'weights' in routesAtIntersection[s].keys():
+                    file.write(street + " " +
+                               str(routesAtIntersection[s]['weights'][count])+'\n')
+                    count = count+1
+                else:
+                    file.write(street + " " + str(1)+'\n')
 
 
 def getTimeToComplete(input_parameters):
@@ -135,6 +143,11 @@ def addWeights(road_statistics, routesAtIntersection):
         print(weights)
         routesAtIntersection[intersection]['weights'] = weights
     return routesAtIntersection
+# routesAtIntersection
+# {'0': {'name': ['rue-de-londres'], 'weights': array([1])},
+#  '1': {'name': ['rue-d-amsterdam', 'rue-d-athenes'], 'weights': array([1, 1])},
+#  '3': {'name': ['rue-de-rome'], 'weights': array([1])},
+#  '2': {'name': ['rue-de-moscou'], 'weights': array([1])}}
 
 
 if __name__ == '__main__':
@@ -150,5 +163,5 @@ if __name__ == '__main__':
     routesAtIntersection = removeUnusedRoads(
         road_statistics, routesAtIntersection)
     routesAtIntersection = addWeights(road_statistics, routesAtIntersection)
-    # file_name = Path(file).name
-    # outPutFile(routesAtIntersection, 'Outputs/output_'+file_name)
+    file_name = Path(file).name
+    outPutFile(routesAtIntersection, 'Outputs/output_'+file_name)
