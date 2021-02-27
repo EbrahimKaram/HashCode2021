@@ -29,13 +29,26 @@ Well currently streets lamps just cycle through on the intersections. We just tu
 
 Now I rewrote the naive implementation and we got the follwoiung score. 7,885,740 points. This is a bit upsetting since we would have gotten a higher score with File D which gave a score of zero.
 
+Now, here we considered the intersections to be considered at the end of the road. When we turn a green light, we turn the green light for the road that the car is already on. We aren't turning on for the road it will got to. (A key point to understand.)
+
 ![naiveImplementation](https://user-images.githubusercontent.com/10140799/109394042-ec7d8580-78f2-11eb-9092-d8dc5b7254e6.png)
 
 You can check teh implementaion by checking `Naive_implemtation.py`
 
+
+
 ## Removing Unessarary roads
 The cars aren't passing on each road so if we removed the roads that aren't being used we can drastically improve the code. 
 
+We understand that cars start at the end of the road mentioned. In a way, we don't care if the car starts in a certain place and nno other car enters that road. So we should actually ignore the first path in the cars planned trajecotry.
+
+If a road is in the path for multiple cars, we prefer to keep it on longer than other routes since it's more used and we don't want it to get jammed
+
+
+
+## Extra notes
+* Some cars will never arrive to their destination. simple because the path they plan to take is longer than the simulation time even. If the car was able to hit every green light, it would be too slow to arrive. (this is why you can never get 2 cars to arrive in example 1)
+* Given the above. A car will never travel the full path given the simulation time.
 
 
 
