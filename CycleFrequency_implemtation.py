@@ -15,7 +15,6 @@ street_name = "Name of Street"
 
 
 def readinput(inputPath, input_file):
-    street_count = 0
     car_count = 0
     file = open(inputPath, 'r')
     for (i, line) in enumerate(file):
@@ -34,7 +33,6 @@ def readinput(inputPath, input_file):
             street_info = list(line.split(' '))
             input_file['Streets'][street_info[2]] = {
                 B: street_info[0], E: street_info[1], L: int(street_info[3])}
-            street_count += 1
 
         elif (i > input_file[S]):
             input_file['Cars'][car_count] = {P: int(line.split(' ')[0]),
@@ -92,7 +90,7 @@ def getTimeToComplete(input_parameters):
         sum = 0
         for path in car_path:
             sum = sum + input_parameters['Streets'][path][L]
-        print(sum)
+        # print(sum)
         input_parameters['Cars'][key]['Time Needed'] = sum
     return input_parameters
 
@@ -106,42 +104,50 @@ def getRoadStatistics(input_parameters):
         for path in car_path:
             input_parameters['Streets'][path][L]
             if path in road_statistics:
-                road_statistics[path] += 1
+                road_statistics[path] = 1 + road_statistics[path]
             else:
                 road_statistics[path] = 1
     return road_statistics
 
 
 # Remove unenccessary intersectrions and roads to print to print
+# Best Reference https://stackoverflow.com/questions/6777485/modifying-a-python-dict-while-iterating-over-it
 def removeUnusedRoads(road_statistics, routesAtIntersection):
-    for intersection in list(routesAtIntersection):
+    for intersection in list(routesAtIntersection.keys()):
         roads = routesAtIntersection[intersection]['name']
+        to_delete=[]
         for road in roads:
+            # print(road)
+            if (road=='cdee-ccih'):
+                print('cdee-ccih is iterated on') 
             # if the road is not used we need to remove it from list
             if road not in road_statistics.keys():
                 routesAtIntersection[intersection]['name'].remove(road)
+                if (road=='cdee-ccih'):
+                    print('cdee-ccih should have been deleted') 
         # If no roads are used and all removed.
         if not routesAtIntersection[intersection]['name']:
-            print("empty List")
-            del routesAtIntersection[intersection]
+            to_delete.append(intersection)
+    for key in to_delete:
+        del routesAtIntersection[key]
+ 
     return routesAtIntersection
 
-# TODO: add wieghts
-
-
+# TODO: add weights
 def addWeights(road_statistics, routesAtIntersection):
     for intersection in routesAtIntersection:
         paths = routesAtIntersection[intersection]['name']
         weights = []
         for path in paths:
             weights.append(road_statistics[path])
-        print(weights)
-        # We need to find the GCF
-        factor = np.gcd.reduce(weights)
-        print("factor", factor)
-        weights = np.divide(weights, factor).astype(int)
-        print(weights)
-        routesAtIntersection[intersection]['weights'] = weights
+        if(weights==[]):
+            print("weights is empty")
+        else:
+            factor = np.gcd.reduce(weights)
+            # print("factor", factor)
+            weights = np.divide(weights, factor).astype(int)
+            # print(weights)
+            routesAtIntersection[intersection]['weights'] = weights
     return routesAtIntersection
 # routesAtIntersection
 # {'0': {'name': ['rue-de-londres'], 'weights': array([1])},
@@ -153,15 +159,15 @@ def addWeights(road_statistics, routesAtIntersection):
 if __name__ == '__main__':
     input_files = glob.glob("Inputs/*.txt")
     # for file in input_files:
-    file = input_files[0]
+    file = input_files[1]
+    print(file)
     input_parameters = {D: 0, I: 0, S: 0,
                         V: 0, F: 0, 'Streets': {}, 'Cars': {}}
     input_parameters = readinput(file, input_parameters)
-    input_parameters = getTimeToComplete(input_parameters)
+    # input_parameters = getTimeToComplete(input_parameters)
     routesAtIntersection = streetsAtIntersection(input_parameters)
     road_statistics = getRoadStatistics(input_parameters)
-    routesAtIntersection = removeUnusedRoads(
-        road_statistics, routesAtIntersection)
-    routesAtIntersection = addWeights(road_statistics, routesAtIntersection)
-    file_name = Path(file).name
-    outPutFile(routesAtIntersection, 'Outputs/output_'+file_name)
+    removeUnusedRoads(road_statistics, routesAtIntersection)
+    addWeights(road_statistics, routesAtIntersection)
+    # file_name = Path(file).name
+    # outPutFile(routesAtIntersection, 'Outputs/output_'+file_name)
