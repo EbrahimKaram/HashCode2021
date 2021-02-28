@@ -77,11 +77,13 @@ def outPutFile(routesPerIntersection, outPutFile):
             count = 0
             for street in streets:
                 # Will find a way to addd weights to the dictionary
-                if 'weights' in routesAtIntersection[s].keys():
+                weights=routesAtIntersection[s]['weights']
+                if ('weights' in routesAtIntersection[s].keys()) and len(weights)==len(streets) :
                     file.write(street + " " +
-                               str(routesAtIntersection[s]['weights'][count])+'\n')
+                               str(weights[count])+'\n')
                     count = count+1
                 else:
+                    count=0
                     file.write(street + " " + str(1)+'\n')
 
 
@@ -148,7 +150,7 @@ def addWeights(road_statistics, routesAtIntersection):
             if path in road_statistics:
                 weights.append(road_statistics[path])
         if(weights == []):
-            print("weights is empty")
+            # print("weights is empty")
             # need to delete the
             to_delete.append(intersection)
         else:
@@ -170,20 +172,22 @@ def addWeights(road_statistics, routesAtIntersection):
 
 if __name__ == '__main__':
     input_files = glob.glob("Inputs/*.txt")
-    # for file in input_files:
-    file = input_files[1]
-    print(file)
-    input_parameters = {D: 0, I: 0, S: 0,
-                        V: 0, F: 0, 'Streets': {}, 'Cars': {}}
-    input_parameters = readinput(file, input_parameters)
-    # input_parameters = getTimeToComplete(input_parameters)
-    routesAtIntersection = streetsAtIntersection(input_parameters)
-    road_statistics = getRoadStatistics(input_parameters)
-    routesAtIntersection_1 = removeUnusedRoads(
-        road_statistics, routesAtIntersection.copy())
+    for file in input_files:
+        # file = input_files[1]
+        print(file)
+        input_parameters = {D: 0, I: 0, S: 0,
+                            V: 0, F: 0, 'Streets': {}, 'Cars': {}}
+        input_parameters = readinput(file, input_parameters)
+        input_parameters = getTimeToComplete(input_parameters)
+        routesAtIntersection = streetsAtIntersection(input_parameters)
+        road_statistics = getRoadStatistics(input_parameters)
+        routesAtIntersection_1 = removeUnusedRoads(
+            road_statistics, routesAtIntersection.copy())
 
-    routesAtIntersection_1 = addWeights(
-        road_statistics, routesAtIntersection_1)
+        routesAtIntersection_1 = addWeights(
+            road_statistics, routesAtIntersection_1)
 
-    file_name = Path(file).name
-    outPutFile(routesAtIntersection_1, 'Outputs/output_'+file_name)
+        file_name = Path(file).name
+        outPutFile(routesAtIntersection_1, 'Outputs/output_'+file_name)
+
+
