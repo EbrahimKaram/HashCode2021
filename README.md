@@ -58,7 +58,9 @@ If cars are going to be using a road more often they need to be on more often th
 
 JUST sucks
 
-The outputs weren't even that much better. They were up to par but they didn't work
+The outputs weren't even that much better. They were up to par but they didn't work. Not much Score improvement
+![Cyclic_frequency](https://user-images.githubusercontent.com/10140799/109406089-42c6e480-7944-11eb-8299-b05a13ddb6f1.png)
+
 
 
 ## Extra notes
