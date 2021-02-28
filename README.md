@@ -81,4 +81,4 @@ https://stackoverflow.com/questions/6777485/modifying-a-python-dict-while-iterat
 ## Extra notes
 * Some cars will never arrive to their destination. simple because the path they plan to take is longer than the simulation time even. If the car was able to hit every green light, it would be too slow to arrive. (this is why you can never get 2 cars to arrive in example 1). we can just decide to ignore the path of these cars since they will never arrive
 * Given the above. A car will never travel the full path given the simulation time.
-* We also could ignore the last track of a path since it isn't connected to an interestion.
+* We also could ignore the last track of a path since it isn't connected to an intersection.
