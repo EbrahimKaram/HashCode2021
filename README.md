@@ -11,6 +11,7 @@ Team name: Semi-Azzi
 * Ebrahim Karam
 * Abel Sostre
 
+AJ wasn't with us due to classes but he allowed us to check our ratings with US scoreboards as well since his Gmail was associated with the US while JP and I had ones associated with Lebanon
 ### Our Score During Competition
 We seemed to have a trouble with the submission of file d and were getting 0 points on it. This is an attempt to clean up and go through it.
 
@@ -81,4 +82,4 @@ https://stackoverflow.com/questions/6777485/modifying-a-python-dict-while-iterat
 ## Extra notes
 * Some cars will never arrive to their destination. simple because the path they plan to take is longer than the simulation time even. If the car was able to hit every green light, it would be too slow to arrive. (this is why you can never get 2 cars to arrive in example 1). we can just decide to ignore the path of these cars since they will never arrive
 * Given the above. A car will never travel the full path given the simulation time.
-* We also could ignore the last track of a path since it isn't connected to an interestion.
+* We also could ignore the last track of a path since it isn't connected to an intersection.
