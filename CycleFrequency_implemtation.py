@@ -115,8 +115,8 @@ def getRoadStatistics(input_parameters):
 # Best Reference https://stackoverflow.com/questions/6777485/modifying-a-python-dict-while-iterating-over-it
 def removeUnusedRoads(road_statistics, routesAtIntersection):
     to_delete = []
-    for intersection in routesAtIntersection.keys():
-        roads = routesAtIntersection[intersection]['name']
+    for intersection, value in routesAtIntersection.items():
+        roads = value['name']
         for road in roads:
             # print(road)
             if (road == 'cdee-ccih'):
@@ -124,10 +124,9 @@ def removeUnusedRoads(road_statistics, routesAtIntersection):
             # if the road is not used we need to remove it from list
             if road not in road_statistics.keys():
                 routesAtIntersection[intersection]['name'].remove(road)
-                if (road == 'cdee-ccih'):
+                if (road == "cdee-ccih"):
                     print('cdee-ccih should have been deleted')
         # If no roads are used and all removed.
-        print(routesAtIntersection[intersection]['name'])
         if (len(routesAtIntersection[intersection]['name']) == 0):
             to_delete.append(intersection)
     # print(to_delete)
@@ -137,19 +136,30 @@ def removeUnusedRoads(road_statistics, routesAtIntersection):
     return routesAtIntersection
 
 # TODO: add weights
+# Couldn't fix the bug. Going to brute force and double check
+
+
 def addWeights(road_statistics, routesAtIntersection):
+    to_delete = []
     for intersection in routesAtIntersection:
         paths = routesAtIntersection[intersection]['name']
         weights = []
         for path in paths:
-            weights.append(road_statistics[path])
+            if path in road_statistics:
+                weights.append(road_statistics[path])
         if(weights == []):
             print("weights is empty")
-        factor = np.gcd.reduce(weights)
-        # print("factor", factor)
-        weights = np.divide(weights, factor).astype(int)
-        # print(weights)
-        routesAtIntersection[intersection]['weights'] = weights
+            # need to delete the
+            to_delete.append(intersection)
+        else:
+            factor = np.gcd.reduce(weights)
+            # print("factor", factor)
+            weights = np.divide(weights, factor).astype(int)
+            # print(weights)
+            routesAtIntersection[intersection]['weights'] = weights
+    # Remove keys we might have missed in this BS!!!
+    for key in to_delete:
+        del routesAtIntersection[key]
     return routesAtIntersection
 # routesAtIntersection
 # {'0': {'name': ['rue-de-londres'], 'weights': array([1])},
@@ -169,10 +179,11 @@ if __name__ == '__main__':
     # input_parameters = getTimeToComplete(input_parameters)
     routesAtIntersection = streetsAtIntersection(input_parameters)
     road_statistics = getRoadStatistics(input_parameters)
+    routesAtIntersection_1 = removeUnusedRoads(
+        road_statistics, routesAtIntersection.copy())
 
-    removeUnusedRoads(road_statistics, routesAtIntersection)
+    routesAtIntersection_1 = addWeights(
+        road_statistics, routesAtIntersection_1)
 
-    addWeights(road_statistics, routesAtIntersection)
-
-    # file_name = Path(file).name
-    # outPutFile(routesAtIntersection, 'Outputs/output_'+file_name)
+    file_name = Path(file).name
+    outPutFile(routesAtIntersection_1, 'Outputs/output_'+file_name)
